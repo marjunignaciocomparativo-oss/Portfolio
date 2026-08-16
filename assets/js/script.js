@@ -42,3 +42,41 @@ for (let i = 0; i < navigationLinks.length; i++) {
     }
   });
 }
+
+// project lightbox variables
+const projectLightbox = document.querySelector("[data-project-lightbox]");
+const projectLightboxImg = document.querySelector("[data-project-lightbox-img]");
+const projectLightboxCaption = document.querySelector("[data-project-lightbox-caption]");
+const projectLightboxClose = document.querySelector("[data-project-lightbox-close]");
+const projectLinks = document.querySelectorAll(".projects-post-item > a");
+
+const openProjectLightbox = function (imgSrc, imgAlt) {
+  projectLightboxImg.setAttribute("src", imgSrc);
+  projectLightboxImg.setAttribute("alt", imgAlt);
+  projectLightboxCaption.textContent = imgAlt;
+  elementToggleFunc(projectLightbox);
+  document.body.style.overflow = "hidden";
+}
+
+const closeProjectLightbox = function () {
+  projectLightbox.classList.remove("active");
+  document.body.style.overflow = "";
+}
+
+for (let i = 0; i < projectLinks.length; i++) {
+  projectLinks[i].addEventListener("click", function (event) {
+    event.preventDefault();
+    const img = this.querySelector(".projects-banner-box img");
+    if (img) openProjectLightbox(img.getAttribute("src"), img.getAttribute("alt"));
+  });
+}
+
+projectLightboxClose.addEventListener("click", closeProjectLightbox);
+
+projectLightbox.addEventListener("click", function (event) {
+  if (event.target === projectLightbox) closeProjectLightbox();
+});
+
+document.addEventListener("keydown", function (event) {
+  if (event.key === "Escape") closeProjectLightbox();
+});
