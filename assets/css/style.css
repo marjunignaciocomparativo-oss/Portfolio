@@ -681,7 +681,7 @@ main {
 
 .projects-posts-list {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* changed: 2 columns by default instead of 1fr */
+  grid-template-columns: 1fr; /* mobile-first: single column so cards aren't squeezed on small screens */
   gap: 20px;
 }
 
